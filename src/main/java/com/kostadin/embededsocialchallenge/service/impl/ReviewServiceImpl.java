@@ -33,8 +33,8 @@ public class ReviewServiceImpl implements ReviewService {
                     .collect(Collectors.toList());
 
         return result.stream()
-                .sorted(getComparator(rating))
                 .sorted(getComparator(date))
+                .sorted(getComparator(rating))
                 .sorted(getComparator(text))
                 .collect(Collectors.toList());
 
@@ -43,9 +43,9 @@ public class ReviewServiceImpl implements ReviewService {
     private Comparator<Review> getComparator(String s) {
 
         if (s.startsWith("Highest"))
-            return Comparator.comparing(Review::getRating);
-        else if (s.startsWith("Lowest"))
             return Comparator.comparing(Review::getRating).reversed();
+        else if (s.startsWith("Lowest"))
+            return Comparator.comparing(Review::getRating);
         else if (s.startsWith("Oldest"))
             return Comparator.comparing(Review::getReviewCreatedOnDate);
         else if (s.startsWith("Newest"))

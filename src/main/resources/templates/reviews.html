@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+
+    <link rel="stylesheet" th:href="@{/style.css}">
+
+    <title>Reviews</title>
+</head>
+
+<body>
+
+<div class="filter-form">
+
+    <form action="/filter" method="POST">
+        <legend>
+            <h2>Review Filter</h2>
+        </legend>
+
+        <div class="form-item">
+            <label for="rating">Order by rating</label>
+            <select name="rating" class="form-select" id="rating">
+                <option>Highest First</option>
+                <option>Lowest First</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label for="minRating">Minimum rating</label>
+            <select name="minRating" class="form-select" id="minRating">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label for="date">Order by date</label>
+            <select name="date" class="form-select" id="date">
+                <option>Oldest First</option>
+                <option>Newest First</option>
+            </select>
+        </div>
+
+        <div class="form-item">
+            <label for="text">Prioritize by text</label>
+            <select name="text" class="form-select" id="text">
+                <option>Yes</option>
+                <option>No</option>
+            </select>
+        </div>
+        <button type="submit" class="filter-btn" id="submit">Filter</button>
+    </form>
+
+</div>
+
+<table class="content-table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Rating</th>
+        <th>Review Text</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="review : ${reviews}">
+        <td th:text="${review.getId()}"></th>
+        <td th:text="${review.getRating()}"></td>
+        <td th:text="${review.getReviewText()}"></td>
+        <td th:text="${review.getReviewCreatedOnDate()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+
+</html>

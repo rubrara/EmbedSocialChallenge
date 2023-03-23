@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/")
 public class ReviewController {
 
@@ -19,17 +19,20 @@ public class ReviewController {
     }
 
     @GetMapping({"/", "/show-reviews"})
-    public List<Review> allReviews() {
+    public String allReviews(Model model) {
 
-        return service.listAll();
+        model.addAttribute("reviews", service.listAll());
+        return "reviews";
     }
 
     @PostMapping("/filter")
-    public List<Review> filter(@RequestParam String rating, @RequestParam Integer minRating, @RequestParam String date, @RequestParam String text, Model model) {
+    public String filter(@RequestParam String rating, @RequestParam Integer minRating, @RequestParam String date, @RequestParam String text, Model model) {
 
         List<Review> filteredReviews = service.listFiltered(rating, minRating, date, text);
 
-        return filteredReviews;
+        model.addAttribute("reviews", filteredReviews);
+
+        return "reviews";
     }
 
 }
