@@ -32,6 +32,11 @@ public class ReviewController {
 
         model.addAttribute("reviews", filteredReviews);
 
+        model.addAttribute("rating", rating);
+        model.addAttribute("minRating", minRating);
+        model.addAttribute("date", date);
+        model.addAttribute("text", text);
+
         return "reviews";
     }
 
